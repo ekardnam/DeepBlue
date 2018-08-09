@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A data class for a document list
  */
-public class Documents {
+public final class Documents {
 
     /**
      * The document list

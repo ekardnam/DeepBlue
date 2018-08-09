@@ -3,7 +3,7 @@ package org.deepblue;
 /**
  * A data class for a language
  */
-public class Language {
+public final class Language {
 
     private String name;
 

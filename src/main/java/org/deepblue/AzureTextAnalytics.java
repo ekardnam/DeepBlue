@@ -1,21 +1,25 @@
 package org.deepblue;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.URL;
 
 /**
  * Azure Text Analytics utility
  */
-public class AzureTextAnalytics {
+public final class AzureTextAnalytics {
 
     /**
      * The default azure backend the DeepBlue will connect to if not specified
      */
-    public static String DEFAULT_AZURE_URL = "https://westus.api.cognitive.microsoft.com";
+    public static final String DEFAULT_AZURE_URL = "https://westus.api.cognitive.microsoft.com";
+    public static final String LANGUAGE_BACKEND = "/text/analytics/v2.0/languages";
+    public static final String SENTIMENT_BACKEND = "/text/analytics/v2.0/sentiment";
+    public static final String KEYWORDS_BACKEND = "/text/analytics/v2.0/keyPhrases";
+
 
     private String apiKey;
     private String url;
@@ -41,14 +45,27 @@ public class AzureTextAnalytics {
     /**
      * Gets the language of the given text
      * @param documents the {@link Documents}
-     * @return a {@link Language} object
+     * @return a {@link Documents} object with attached languages in the {@link Document#getDetectedLaguages()}
      */
-    public Language getLanguage(Documents documents) throws UnsupportedEncodingException, IOException {
+    public Documents getLanguage(Documents documents) throws IOException {
+        return requestDataFromBackend(LANGUAGE_BACKEND, documents);
+    }
+
+    public Documents getSentiment(Documents documents) throws IOException {
+        return requestDataFromBackend(SENTIMENT_BACKEND, documents);
+    }
+
+    public Documents getKeywords(Documents documents) throws IOException {
+        return requestDataFromBackend(KEYWORDS_BACKEND, documents);
+    }
+
+    private Documents requestDataFromBackend(String path, Documents documents) throws IOException {
         byte[] jsonData = encode(documents);
-        HttpsURLConnection connection = connectToAzureBackend("");
+        HttpsURLConnection connection = connectToAzureBackend(path);
         writeBytes(jsonData, connection.getOutputStream());
         String reply = readReply(connection.getInputStream());
 
+        return new Gson().fromJson(reply, Documents.class);
     }
 
     private void writeBytes(byte[] bytes, OutputStream os) throws IOException {

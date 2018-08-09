@@ -1,26 +1,23 @@
 package org.deepblue;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.List;
 
 /**
  * A data class for a Document
  */
-public class Document {
+public final class Document {
 
-    /**
-     * The document's id
-     */
     private String id;
 
-    /**
-     * The document's text
-     */
     private String text;
 
-    /**
-     * Languages detected by azure backend
-     */
+    private String language;
+
     private List<Language> detectedLaguages;
+
+    private float score;
 
     /**
      * Constructs a Document
@@ -32,4 +29,40 @@ public class Document {
         this.text = text;
     }
 
+    public Document(String id, String language, String text) {
+        this(id, text);
+        setLanguage(language);
+    }
+
+    /**
+     * The document's id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * The document's text
+     */
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Languages detected by azure backend
+     */
+    public List<Language> getDetectedLaguages() {
+        return detectedLaguages;
+    }
+
+    /**
+     * Sentiment score given by azure backend
+     */
+    public float getScore() {
+        return score;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }
