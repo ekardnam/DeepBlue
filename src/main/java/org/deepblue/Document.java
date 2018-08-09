@@ -1,7 +1,6 @@
 package org.deepblue;
 
-import org.jetbrains.annotations.Contract;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +18,8 @@ public final class Document {
 
     private float score;
 
+    private List<String> keyPhrases;
+
     /**
      * Constructs a Document
      * @param id doc's id
@@ -31,7 +32,7 @@ public final class Document {
 
     public Document(String id, String language, String text) {
         this(id, text);
-        setLanguage(language);
+        this.language = language;
     }
 
     /**
@@ -52,7 +53,7 @@ public final class Document {
      * Languages detected by azure backend
      */
     public List<Language> getDetectedLaguages() {
-        return detectedLaguages;
+        return new ArrayList<>(detectedLaguages);
     }
 
     /**
@@ -62,7 +63,10 @@ public final class Document {
         return score;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    /**
+     * Keyphrases given by azure backend
+     */
+    public List<String> getKeyPhrases() {
+        return new ArrayList<>(keyPhrases);
     }
 }

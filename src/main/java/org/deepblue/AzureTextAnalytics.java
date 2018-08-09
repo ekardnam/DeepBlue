@@ -4,7 +4,6 @@ import com.google.gson.*;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.URL;
 
 /**
@@ -19,7 +18,6 @@ public final class AzureTextAnalytics {
     public static final String LANGUAGE_BACKEND = "/text/analytics/v2.0/languages";
     public static final String SENTIMENT_BACKEND = "/text/analytics/v2.0/sentiment";
     public static final String KEYWORDS_BACKEND = "/text/analytics/v2.0/keyPhrases";
-
 
     private String apiKey;
     private String url;
@@ -43,18 +41,31 @@ public final class AzureTextAnalytics {
     }
 
     /**
-     * Gets the language of the given text
+     * Gets the language of the given documents
      * @param documents the {@link Documents}
      * @return a {@link Documents} object with attached languages in the {@link Document#getDetectedLaguages()}
+     * @throws IOException
      */
     public Documents getLanguage(Documents documents) throws IOException {
         return requestDataFromBackend(LANGUAGE_BACKEND, documents);
     }
 
+    /**
+     * Gets the sentiment score of the given documents
+     * @param documents the {@link Documents}
+     * @return a {@link Documents} object with attached score in {@link Document#getScore()}
+     * @throws IOException
+     */
     public Documents getSentiment(Documents documents) throws IOException {
         return requestDataFromBackend(SENTIMENT_BACKEND, documents);
     }
 
+    /**
+     * Gets the keywords of the given documents
+     * @param documents the {@link Documents}
+     * @return a {@link Documents} object with attached keywords in {@link Document#getKeyPhrases()}
+     * @throws IOException
+     */
     public Documents getKeywords(Documents documents) throws IOException {
         return requestDataFromBackend(KEYWORDS_BACKEND, documents);
     }
@@ -78,7 +89,6 @@ public final class AzureTextAnalytics {
     private String readReply(InputStream is) throws IOException {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);

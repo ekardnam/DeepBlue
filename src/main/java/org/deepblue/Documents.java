@@ -1,6 +1,7 @@
 package org.deepblue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,10 +25,15 @@ public final class Documents {
      * Adds a document to the list in a thread safe way
      * @param doc the {@link Document}
      */
-    public void add(Document doc) {
+    public Documents add(Document doc) {
         synchronized (documents) {
             documents.add(doc);
         }
+        return this;
+    }
+
+    public List<Document> getDocuments() {
+        return new ArrayList<>(documents);
     }
 
 }
