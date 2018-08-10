@@ -1,7 +1,6 @@
 package org.deepblue;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,6 +33,17 @@ public final class Documents {
 
     public List<Document> getDocuments() {
         return new ArrayList<>(documents);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Documents)) return false;
+        return documents.equals(((Documents) other).documents);
+    }
+
+    @Override
+    public int hashCode() {
+        return documents.hashCode();
     }
 
 }
