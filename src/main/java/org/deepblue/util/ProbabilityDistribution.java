@@ -2,10 +2,7 @@ package org.deepblue.util;
 
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -45,17 +42,17 @@ public class ProbabilityDistribution {
      * @return a {@link StatisticalData} object
      */
     public StatisticalData getByLabel(String label) {
-        needsOrderedData();
-
-        int index = Collections.binarySearch(data, StatisticalData.newData(label, 1, 1), Comparator.comparing(StatisticalData::label));
-        return index > 0? data.get(index) : null;
+        for (StatisticalData sd: data) {
+            if (Objects.equals(label, sd.label())) return sd.copy();
+        }
+        return null;
     }
 
     public StatisticalData getByValue(float value) {
         needsOrderedData();
 
         int index = Collections.binarySearch(data, StatisticalData.newData(null, value, 1), (o1, o2) -> Float.compare(o1.value(), o2.value()));
-        return index > 0? data.get(index) : null;
+        return index > 0? data.get(index).copy() : null;
     }
 
     /**

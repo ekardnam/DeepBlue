@@ -1,7 +1,5 @@
 package org.deepblue.util;
 
-import org.deepblue.DeepBlue;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -43,6 +41,10 @@ public abstract class StatisticalData {
 
     public StatisticalData withValue(float value) {
         return new DataContainer(label(), value, probability());
+    }
+
+    public StatisticalData copy() {
+        return StatisticalData.newData(label(), value(), probability());
     }
 
     public static StatisticalData newData(String label, float value, float probability) {
