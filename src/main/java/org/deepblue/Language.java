@@ -55,7 +55,7 @@ public final class Language extends StatisticalData {
     }
 
     @Override
-    public float weight() {
+    public float value() {
         return 1;
     }
 

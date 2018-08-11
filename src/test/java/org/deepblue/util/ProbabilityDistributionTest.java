@@ -28,4 +28,15 @@ public class ProbabilityDistributionTest {
 
     }
 
+    @Test
+    public void testDuplicates() {
+        StatisticalData[] data = new StatisticalData[] {
+                StatisticalData.newData("a", 0.4f, 0.2f),
+                StatisticalData.newData("b", 1.0f, 0.3f),
+                StatisticalData.newData("a", 0.4f, 0.5f),
+                StatisticalData.newData("d", 1.0f, 0.4f)
+        };
+        ProbabilityDistribution pb = ProbabilityDistribution.fromStatisticalData(Arrays.asList(data));
+    }
+
 }
