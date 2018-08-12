@@ -80,6 +80,16 @@ public class ProbabilityDistribution {
     }
 
     /**
+     * Does the square and returns the squared ProbabilityDistribution
+     */
+    public ProbabilityDistribution square() {
+        List<StatisticalData> newData = data.stream()
+                .map((sd) -> sd.withValue(sd.value() * sd.value()))
+                .collect(Collectors.toList());
+        return ProbabilityDistribution.fromStatisticalData(newData);
+    }
+
+    /**
      * Return true if the sum of all probabilities is one
      */
     public boolean isNormalized() {
