@@ -7,6 +7,7 @@ import java.util.Objects;
 /**
  * A data class for a language
  */
+@SuppressWarnings("unused")
 public final class Language extends StatisticalData {
 
     private String name;

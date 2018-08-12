@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * A wrapper class to make API calls faster
  */
+@SuppressWarnings("unused")
 public final class DeepBlue {
 
     private AzureTextAnalytics azureBackend;

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 /**
  * A class that represents a probability distribution
  */
+@SuppressWarnings("unused")
 public class ProbabilityDistribution {
 
     /**

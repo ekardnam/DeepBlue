@@ -7,6 +7,7 @@ import java.util.Objects;
 /**
  * A data class for a Document
  */
+@SuppressWarnings("unused")
 public final class Document {
 
     private String id;
