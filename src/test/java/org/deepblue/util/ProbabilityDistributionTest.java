@@ -37,6 +37,7 @@ public class ProbabilityDistributionTest {
                 StatisticalData.newData("d", 1.0f, 0.4f)
         };
         ProbabilityDistribution pb = ProbabilityDistribution.fromStatisticalData(Arrays.asList(data));
+        assertTrue(Float.compare(pb.getByLabel("a").probability(), 0.7f) == 0);
     }
 
 }

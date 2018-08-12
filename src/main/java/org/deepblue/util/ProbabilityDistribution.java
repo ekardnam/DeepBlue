@@ -141,7 +141,7 @@ public class ProbabilityDistribution {
     private void sumDuplicates() {
         needsOrderedData();
 
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < data.size() - 1; i++) {
             StatisticalData sd = data.get(i);
             float finalProb = sd.probability();
             BigDecimal _value = new BigDecimal(sd.value());
